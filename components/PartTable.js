@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import { Table, Menu, Icon } from 'semantic-ui-react';
-import TableHeader from './TableHeader'
+import TableHeader from './TableHeader';
 import Row from './Row';
-import Pagination from './Pagination'
-import dummy from '../data/dummy'
+import Pagination from './Pagination';
+import dummy from '../data/dummy';
+import styles from '../styles/Home.module.css';
 
 function exampleReducer(state, action) {
 	switch (action.type) {
@@ -26,6 +27,16 @@ function exampleReducer(state, action) {
 			throw new Error();
 	}
 }
+
+const renderBlanks = (dummy, slice, rows) => {
+	const blanks = [];
+	if (slice.end > dummy.length) {
+		for (let i = 0; i < rows - (dummy.length % rows); i++) {
+			blanks.push(<Row />);
+		}
+		return blanks;
+	}
+};
 
 export default function PartTable(props) {
 	const [rows, setRows] = useState(10);
@@ -52,30 +63,20 @@ export default function PartTable(props) {
 		}
 	};
 
-	const renderBlanks = () => {
-		const blanks = [];
-		if (slice.end > dummy.length) {
-			for (let i = 0; i < rows - (dummy.length % rows); i++) {
-				blanks.push(<Row />);
-			}
-			return blanks;
-		}
-	};
-
 	return (
 		<Table
-            unstackable
-            color={!props.dark ? 'blue' : 'black'}
+			unstackable
+			color={!props.dark ? 'blue' : 'black'}
 			compact='very'
 			size='small'
 			celled
 			selectable
 			inverted={props.dark}
-            padded
+			padded
 			sortable
-			style={{ height: 450, width: '95vw', maxWidth: 600, boxShadow: `1px 1px 10px ${props.dark ? 'black' : 'lightgrey'}`}}
+			className={props.dark ? styles.partTableDark : styles.partTable}
 		>
-			<TableHeader state={state} dispatch={dispatch}/>
+			<TableHeader state={state} dispatch={dispatch} />
 			<Table.Body>
 				{state.data.slice(slice.start, slice.end).map((item, i) => (
 					<Row
@@ -88,12 +89,18 @@ export default function PartTable(props) {
 						desc={item.desc}
 					/>
 				))}
-				{renderBlanks()}
+				{renderBlanks(dummy, slice, rows)}
 			</Table.Body>
 			<Table.Footer>
 				<Table.Row>
 					<Table.HeaderCell colSpan='6'>
-						<Pagination dummy={dummy} rows={rows} pageChange={pageChange} slice={slice} dark={props.dark}/>
+						<Pagination
+							dummy={dummy}
+							rows={rows}
+							pageChange={pageChange}
+							slice={slice}
+							dark={props.dark}
+						/>
 					</Table.HeaderCell>
 				</Table.Row>
 			</Table.Footer>

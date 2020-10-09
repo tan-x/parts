@@ -34,6 +34,20 @@
   align-items: center;
 }
 
+.partTable {
+  height: 450px;
+  width: '95vw';
+  max-width: 600px;
+  box-shadow: 1px 1px 10px lightgrey;
+}
+
+.partTableDark {
+  height: 450px;
+  width: '95vw';
+  max-width: 600px;
+  box-shadow: 1px 1px 10px black;
+}
+
 .ui.inverted.blue.table {
   background: #333!important;
   color: rgba(255,255,255,.9);
