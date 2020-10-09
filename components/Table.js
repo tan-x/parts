@@ -28,7 +28,7 @@ export default function PartTable(props) {
 	];
 
 	return (
-		<Table unstackable fixedcollapsing compact='very' size='small' celled selectable>
+		<Table unstackable fixedcollapsing="true" compact='very' size='small' celled selectable>
 			<Table.Header>
 				<Table.Row>
 					<Table.HeaderCell width={1}>#</Table.HeaderCell>
@@ -39,8 +39,8 @@ export default function PartTable(props) {
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
-				{dummy.map((item) => (
-					<Row num={item.num} val={item.val} type={item.type} size={item.size} mount={item.mount} />
+				{dummy.map((item, i) => (
+					<Row key={i} num={item.num} val={item.val} type={item.type} size={item.size} mount={item.mount} />
 				))}
 			</Table.Body>
 			<Table.Footer>
