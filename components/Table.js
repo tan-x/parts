@@ -6,42 +6,42 @@ import Row from './Row';
 const dummy = [
 	{
 		num: 20,
-		val: '20k',
+		val: '20 kΩ',
 		type: 'Resistor',
 		size: '0806',
 		mount: 'SMD',
 	},
 	{
 		num: 10,
-		val: '10k',
+		val: '10 kΩ',
 		type: 'Resistor',
 		size: '0806',
 		mount: 'SMD',
 	},
 	{
 		num: 8,
-		val: '2200pf',
+		val: '2200 pf',
 		type: 'Capacitor',
 		size: null,
 		mount: 'THT',
 	},
 	{
 		num: 20,
-		val: '1k',
+		val: '1 kΩ',
 		type: 'Resistor',
 		size: '0603',
 		mount: 'SMD',
 	},
 	{
 		num: 10,
-		val: '2k',
+		val: '2 kΩ',
 		type: 'Resistor',
 		size: '0806',
 		mount: 'SMD',
 	},
 	{
 		num: 8,
-		val: '330pf',
+		val: '330 pf',
 		type: 'Capacitor',
 		size: null,
 		mount: 'THT',
@@ -62,7 +62,7 @@ const dummy = [
 	},
 	{
 		num: 2,
-		val: '100pf',
+		val: '100 pf',
 		type: 'Resistor',
 		size: null,
 		mount: 'THT',
@@ -83,42 +83,42 @@ const dummy = [
 	},
 	{
 		num: 20,
-		val: '20k',
+		val: '20 kΩ',
 		type: 'Resistor',
 		size: '0806',
 		mount: 'SMD',
 	},
 	{
 		num: 10,
-		val: '10k',
+		val: '10 kΩ',
 		type: 'Resistor',
 		size: '0806',
 		mount: 'SMD',
 	},
 	{
 		num: 8,
-		val: '2200pf',
+		val: '2200 pf',
 		type: 'Capacitor',
 		size: null,
 		mount: 'THT',
 	},
 	{
 		num: 20,
-		val: '1k',
+		val: '1 kΩ',
 		type: 'Resistor',
 		size: '0603',
 		mount: 'SMD',
 	},
 	{
 		num: 10,
-		val: '2k',
+		val: '2 kΩ',
 		type: 'Resistor',
 		size: '0806',
 		mount: 'SMD',
 	},
 	{
 		num: 8,
-		val: '330pf',
+		val: '330 pf',
 		type: 'Capacitor',
 		size: null,
 		mount: 'THT',
@@ -139,7 +139,7 @@ const dummy = [
 	},
 	{
 		num: 2,
-		val: '100pf',
+		val: '100 pf',
 		type: 'Resistor',
 		size: null,
 		mount: 'THT',
@@ -160,42 +160,42 @@ const dummy = [
 	},
 	{
 		num: 20,
-		val: '20k',
+		val: '20 kΩ',
 		type: 'Resistor',
 		size: '0806',
 		mount: 'SMD',
 	},
 	{
 		num: 10,
-		val: '10k',
+		val: '10 kΩ',
 		type: 'Resistor',
 		size: '0806',
 		mount: 'SMD',
 	},
 	{
 		num: 8,
-		val: '2200pf',
+		val: '2200 µf',
 		type: 'Capacitor',
 		size: null,
 		mount: 'THT',
 	},
 	{
 		num: 20,
-		val: '1k',
+		val: '1 kΩ',
 		type: 'Resistor',
 		size: '0603',
 		mount: 'SMD',
 	},
 	{
 		num: 10,
-		val: '2k',
+		val: '2 kΩ',
 		type: 'Resistor',
 		size: '0806',
 		mount: 'SMD',
 	},
 	{
 		num: 8,
-		val: '330pf',
+		val: '330 pf',
 		type: 'Capacitor',
 		size: null,
 		mount: 'THT',
@@ -216,7 +216,7 @@ const dummy = [
 	},
 	{
 		num: 2,
-		val: '100pf',
+		val: '100 pf',
 		type: 'Resistor',
 		size: null,
 		mount: 'THT',
@@ -237,42 +237,42 @@ const dummy = [
 	},
 	{
 		num: 20,
-		val: '20k',
+		val: '20 kΩ',
 		type: 'Resistor',
 		size: '0806',
 		mount: 'SMD',
 	},
 	{
 		num: 10,
-		val: '10k',
+		val: '10 kΩ',
 		type: 'Resistor',
 		size: '0806',
 		mount: 'SMD',
 	},
 	{
 		num: 8,
-		val: '2200pf',
+		val: '2200 pf',
 		type: 'Capacitor',
 		size: null,
 		mount: 'THT',
 	},
 	{
 		num: 20,
-		val: '1k',
+		val: '1 kΩ',
 		type: 'Resistor',
 		size: '0603',
 		mount: 'SMD',
 	},
 	{
 		num: 10,
-		val: '2k',
+		val: '2 kΩ',
 		type: 'Resistor',
 		size: '0806',
 		mount: 'SMD',
 	},
 	{
 		num: 8,
-		val: '330pf',
+		val: '330 µf',
 		type: 'Capacitor',
 		size: null,
 		mount: 'THT',
@@ -293,7 +293,7 @@ const dummy = [
 	},
 	{
 		num: 2,
-		val: '100pf',
+		val: '100 µf',
 		type: 'Resistor',
 		size: null,
 		mount: 'THT',
@@ -372,22 +372,23 @@ export default function PartTable(props) {
 			);
 		}
 		return pages;
-    };
-    
-    const renderBlanks = () => {
-        console.log(dummy.length, dummy.length % rows)
-        const blanks = [];
-        if (slice.end > dummy.length) {
-            for (let i = 0; i < (rows - dummy.length % rows); i++) {
-                blanks.push(<Row/>)
-            }
-            return blanks;
-        }
-    }
+	};
+
+	const renderBlanks = () => {
+		console.log(dummy.length, dummy.length % rows);
+		const blanks = [];
+		if (slice.end > dummy.length) {
+			for (let i = 0; i < rows - (dummy.length % rows); i++) {
+				blanks.push(<Row />);
+			}
+			return blanks;
+		}
+	};
 
 	return (
 		<Table
-			unstackable
+            unstackable
+            color={!props.dark ? 'blue' : 'black'}
 			compact='very'
 			size='small'
 			celled
@@ -395,7 +396,7 @@ export default function PartTable(props) {
 			inverted={props.dark}
 			padded
 			sortable
-			style={{ minHeight: 450 }}
+			style={{ height: 450, maxWidth: 640, boxShadow: `1px 1px 10px ${props.dark ? 'black' : 'lightgrey'}`}}
 		>
 			<Table.Header>
 				<Table.Row>
@@ -434,6 +435,9 @@ export default function PartTable(props) {
 					>
 						Mount
 					</Table.HeaderCell>
+					<Table.HeaderCell width={3} disabled>
+						Description
+					</Table.HeaderCell>
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
@@ -445,13 +449,14 @@ export default function PartTable(props) {
 						type={item.type}
 						size={item.size}
 						mount={item.mount}
+						desc={item.desc}
 					/>
 				))}
-                {renderBlanks()}
+				{renderBlanks()}
 			</Table.Body>
 			<Table.Footer>
 				<Table.Row>
-					<Table.HeaderCell colSpan='5'>
+					<Table.HeaderCell colSpan='6'>
 						<Menu floated='right' pagination size='mini' inverted={props.dark}>
 							<Menu.Item as='a' icon onClick={pageChange}>
 								<Icon name='chevron left' />

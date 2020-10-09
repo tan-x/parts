@@ -14,7 +14,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to top, rgb(59, 59, 59), rgb(59, 59, 59))
+  background: rgb(58, 58, 58);
 }
 
 .header {
@@ -32,6 +32,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.ui.inverted.blue.table {
+  background: #333!important;
+  color: rgba(255,255,255,.9);
+  border: none;
 }
 
 .footer {
