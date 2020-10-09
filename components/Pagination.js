@@ -7,7 +7,7 @@ export default function Pagination({ dummy, rows, slice, pageChange, dark }) {
 		const pages = [];
 		for (let i = 0; i < Math.ceil(dummy.length / rows); i++) {
 			pages.push(
-				<Menu.Item as='a' key={i} onClick={pageChange} active={slice.start / rows === i}>
+				<Menu.Item as='a' key={i} onClick={pageChange} active={slice[0] / rows === i}>
 					{i + 1}
 				</Menu.Item>
 			);

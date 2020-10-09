@@ -23,9 +23,9 @@ function exampleReducer(state, action) {
 	};
 }
 
-const renderBlanks = (dummy, slice, rows) => {
+const renderBlanks = (dummy, end, rows) => {
 	const blanks = [];
-	if (slice.end > dummy.length) {
+	if (end > dummy.length) {
 		for (let i = 0; i < rows - (dummy.length % rows); i++) {
 			blanks.push(<Row />);
 		}
@@ -35,7 +35,7 @@ const renderBlanks = (dummy, slice, rows) => {
 
 export default function PartTable(props) {
 	const [rows, setRows] = useState(10);
-	const [slice, setSlice] = useState({ start: 0, end: 10 });
+	const [{start, end}, setSlice] = useState({ start: 0, end: 10 });
 	const [state, dispatch] = React.useReducer(exampleReducer, {
 		column: null,
 		data: dummy,
@@ -48,12 +48,12 @@ export default function PartTable(props) {
 
 	const pageChange = (e, { children, icon }) => {
 		if (typeof children === 'number') {
-			setSlice({ start: children === 1 ? 0 : (children - 1) * rows, end: children * rows });
+			setSlice({ start: (children - 1) * rows, end: children * rows });
 		} else if (icon) {
-			if (children.props.name === 'chevron left' && slice.start > 0) {
-				setSlice({ start: slice.start - rows, end: slice.end - rows });
-			} else if (children.props.name === 'chevron right' && slice.end < dummy.length) {
-				setSlice({ start: slice.start + rows, end: slice.end + rows });
+			if (children.props.name === 'chevron left' && start > 0) {
+				setSlice({ start: start - rows, end: end - rows });
+			} else if (children.props.name === 'chevron right' && end < dummy.length) {
+				setSlice({ start: start + rows, end: end + rows });
 			}
 		}
 	};
@@ -61,22 +61,21 @@ export default function PartTable(props) {
 	return (
 		<Table
 			unstackable
-			color={!props.dark ? 'blue' : 'black'}
-			compact='very'
-			size='small'
-			celled
-			selectable
-			inverted={props.dark}
-			padded
 			sortable
+			selectable
+			size="small"
+			compact="very"
+			color={!props.dark ? 'blue' : null}
+			celled
+			inverted={props.dark}
 			className={props.dark ? styles.partTableDark : styles.partTable}
 		>
 			<TableHeader state={state} dispatch={dispatch} />
 			<Table.Body>
-				{state.data.slice(slice.start, slice.end).map(({ val, num, type, size, mount, desc }, i) => (
+				{state.data.slice(start, end).map(({ val, num, type, size, mount, desc }, i) => (
 					<Row key={i} num={num} val={val} type={type} size={size} mount={mount} desc={desc} />
 				))}
-				{renderBlanks(dummy, slice, rows)}
+				{renderBlanks(dummy, end, rows)}
 			</Table.Body>
 			<Table.Footer>
 				<Table.Row>
@@ -85,7 +84,7 @@ export default function PartTable(props) {
 							dummy={dummy}
 							rows={rows}
 							pageChange={pageChange}
-							slice={slice}
+							slice={[start, end]}
 							dark={props.dark}
 						/>
 					</Table.HeaderCell>
