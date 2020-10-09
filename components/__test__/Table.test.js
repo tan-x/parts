@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Table from "../Table";
+import Table from "../PartTable";
 
 describe("Table", () => {
   it("renders without crashing", () => {
