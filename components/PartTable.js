@@ -8,24 +8,19 @@ import dummy from '../data/dummy';
 import styles from '../styles/Home.module.css';
 
 function exampleReducer(state, action) {
-	switch (action.type) {
-		case 'CHANGE_SORT':
-			if (state.column === action.column) {
-				return {
-					...state,
-					data: state.data.reverse(),
-					direction: state.direction === 'ascending' ? 'descending' : 'ascending',
-				};
-			}
-
-			return {
-				column: action.column,
-				data: _.sortBy(state.data, [action.column]),
-				direction: 'ascending',
-			};
-		default:
-			throw new Error();
+	if (state.column === action.column) {
+		return {
+			...state,
+			data: state.data.reverse(),
+			direction: state.direction === 'ascending' ? 'descending' : 'ascending',
+		};
 	}
+
+	return {
+		column: action.column,
+		data: _.sortBy(state.data, [action.column]),
+		direction: 'ascending',
+	};
 }
 
 const renderBlanks = (dummy, slice, rows) => {
@@ -78,16 +73,8 @@ export default function PartTable(props) {
 		>
 			<TableHeader state={state} dispatch={dispatch} />
 			<Table.Body>
-				{state.data.slice(slice.start, slice.end).map((item, i) => (
-					<Row
-						key={i}
-						num={item.num}
-						val={item.val}
-						type={item.type}
-						size={item.size}
-						mount={item.mount}
-						desc={item.desc}
-					/>
+				{state.data.slice(slice.start, slice.end).map(({ val, num, type, size, mount, desc }, i) => (
+					<Row key={i} num={num} val={val} type={type} size={size} mount={mount} desc={desc} />
 				))}
 				{renderBlanks(dummy, slice, rows)}
 			</Table.Body>
