@@ -394,9 +394,9 @@ export default function PartTable(props) {
 			celled
 			selectable
 			inverted={props.dark}
-			padded
+            padded
 			sortable
-			style={{ height: 450, maxWidth: 640, boxShadow: `1px 1px 10px ${props.dark ? 'black' : 'lightgrey'}`}}
+			style={{ height: 450, width: '95vw', maxWidth: 600, boxShadow: `1px 1px 10px ${props.dark ? 'black' : 'lightgrey'}`}}
 		>
 			<Table.Header>
 				<Table.Row>
@@ -426,7 +426,7 @@ export default function PartTable(props) {
 						sorted={column === 'size' ? direction : null}
 						onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'size' })}
 					>
-						Package Size
+						Package
 					</Table.HeaderCell>
 					<Table.HeaderCell
 						width={2}
