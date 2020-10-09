@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { Table, Menu, Icon } from 'semantic-ui-react';
 import TableHeader from './TableHeader'
 import Row from './Row';
+import Pagination from './Pagination'
 import dummy from '../data/dummy'
 
 function exampleReducer(state, action) {
@@ -53,17 +54,7 @@ export default function PartTable(props) {
 		}
 	};
 
-	const renderPaginations = () => {
-		const pages = [];
-		for (let i = 0; i < Math.ceil(dummy.length / rows); i++) {
-			pages.push(
-				<Menu.Item as='a' key={i} onClick={pageChange} active={slice.start / rows === i}>
-					{i + 1}
-				</Menu.Item>
-			);
-		}
-		return pages;
-	};
+	
 
 	const renderBlanks = () => {
 		console.log(dummy.length, dummy.length % rows);
@@ -107,15 +98,7 @@ export default function PartTable(props) {
 			<Table.Footer>
 				<Table.Row>
 					<Table.HeaderCell colSpan='6'>
-						<Menu floated='right' pagination size='mini' inverted={props.dark}>
-							<Menu.Item as='a' icon onClick={pageChange}>
-								<Icon name='chevron left' />
-							</Menu.Item>
-							{renderPaginations()}
-							<Menu.Item as='a' icon onClick={pageChange}>
-								<Icon name='chevron right' />
-							</Menu.Item>
-						</Menu>
+						<Pagination dummy={dummy} rows={rows} pageChange={pageChange} slice={slice} dark={props.dark}/>
 					</Table.HeaderCell>
 				</Table.Row>
 			</Table.Footer>
