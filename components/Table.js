@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import { Table, Menu, Icon } from 'semantic-ui-react';
+import TableHeader from './TableHeader'
 import Row from './Row';
 import dummy from '../data/dummy'
 
@@ -88,48 +89,7 @@ export default function PartTable(props) {
 			sortable
 			style={{ height: 450, width: '95vw', maxWidth: 600, boxShadow: `1px 1px 10px ${props.dark ? 'black' : 'lightgrey'}`}}
 		>
-			<Table.Header>
-				<Table.Row>
-					<Table.HeaderCell
-						width={1}
-						sorted={column === 'num' ? direction : null}
-						onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'num' })}
-					>
-						#
-					</Table.HeaderCell>
-					<Table.HeaderCell
-						width={2}
-						sorted={column === 'val' ? direction : null}
-						onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'val' })}
-					>
-						Value
-					</Table.HeaderCell>
-					<Table.HeaderCell
-						width={2}
-						sorted={column === 'type' ? direction : null}
-						onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'type' })}
-					>
-						Type
-					</Table.HeaderCell>
-					<Table.HeaderCell
-						width={1}
-						sorted={column === 'size' ? direction : null}
-						onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'size' })}
-					>
-						Package
-					</Table.HeaderCell>
-					<Table.HeaderCell
-						width={2}
-						sorted={column === 'mount' ? direction : null}
-						onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'mount' })}
-					>
-						Mount
-					</Table.HeaderCell>
-					<Table.HeaderCell width={3} disabled>
-						Description
-					</Table.HeaderCell>
-				</Table.Row>
-			</Table.Header>
+			<TableHeader state={state} dispatch={dispatch}/>
 			<Table.Body>
 				{state.data.slice(slice.start, slice.end).map((item, i) => (
 					<Row
