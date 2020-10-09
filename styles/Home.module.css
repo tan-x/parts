@@ -7,8 +7,25 @@
   align-items: center;
 }
 
+.dark {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to top, rgb(59, 59, 59), rgb(59, 59, 59))
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
 .main {
-  padding: 5rem 0;
+  padding: 1rem 0;
   width: 95vw;
   flex: 1;
   display: flex;

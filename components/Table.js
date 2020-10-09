@@ -1,325 +1,354 @@
 import React, { useState, useEffect } from 'react';
+import _ from 'lodash';
 import { Table, Menu, Icon } from 'semantic-ui-react';
 import Row from './Row';
 
+const dummy = [
+	{
+		num: 20,
+		val: '20k',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 10,
+		val: '10k',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 8,
+		val: '2200pf',
+		type: 'Capacitor',
+		size: null,
+		mount: 'THT',
+	},
+	{
+		num: 20,
+		val: '1k',
+		type: 'Resistor',
+		size: '0603',
+		mount: 'SMD',
+	},
+	{
+		num: 10,
+		val: '2k',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 8,
+		val: '330pf',
+		type: 'Capacitor',
+		size: null,
+		mount: 'THT',
+	},
+	{
+		num: 2,
+		val: 'STM32',
+		type: 'IC',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 10,
+		val: '200',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 2,
+		val: '100pf',
+		type: 'Resistor',
+		size: null,
+		mount: 'THT',
+	},
+	{
+		num: 1,
+		val: 'STM64',
+		type: 'IC',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 2,
+		val: 'T101',
+		type: 'IC',
+		size: '0806',
+		mount: 'THT',
+	},
+	{
+		num: 20,
+		val: '20k',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 10,
+		val: '10k',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 8,
+		val: '2200pf',
+		type: 'Capacitor',
+		size: null,
+		mount: 'THT',
+	},
+	{
+		num: 20,
+		val: '1k',
+		type: 'Resistor',
+		size: '0603',
+		mount: 'SMD',
+	},
+	{
+		num: 10,
+		val: '2k',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 8,
+		val: '330pf',
+		type: 'Capacitor',
+		size: null,
+		mount: 'THT',
+	},
+	{
+		num: 2,
+		val: 'STM32',
+		type: 'IC',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 10,
+		val: '200',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 2,
+		val: '100pf',
+		type: 'Resistor',
+		size: null,
+		mount: 'THT',
+	},
+	{
+		num: 1,
+		val: 'STM64',
+		type: 'IC',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 2,
+		val: 'T101',
+		type: 'IC',
+		size: '0806',
+		mount: 'THT',
+	},
+	{
+		num: 20,
+		val: '20k',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 10,
+		val: '10k',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 8,
+		val: '2200pf',
+		type: 'Capacitor',
+		size: null,
+		mount: 'THT',
+	},
+	{
+		num: 20,
+		val: '1k',
+		type: 'Resistor',
+		size: '0603',
+		mount: 'SMD',
+	},
+	{
+		num: 10,
+		val: '2k',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 8,
+		val: '330pf',
+		type: 'Capacitor',
+		size: null,
+		mount: 'THT',
+	},
+	{
+		num: 2,
+		val: 'STM32',
+		type: 'IC',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 10,
+		val: '200',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 2,
+		val: '100pf',
+		type: 'Resistor',
+		size: null,
+		mount: 'THT',
+	},
+	{
+		num: 1,
+		val: 'STM64',
+		type: 'IC',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 2,
+		val: 'T101',
+		type: 'IC',
+		size: '0806',
+		mount: 'THT',
+	},
+	{
+		num: 20,
+		val: '20k',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 10,
+		val: '10k',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 8,
+		val: '2200pf',
+		type: 'Capacitor',
+		size: null,
+		mount: 'THT',
+	},
+	{
+		num: 20,
+		val: '1k',
+		type: 'Resistor',
+		size: '0603',
+		mount: 'SMD',
+	},
+	{
+		num: 10,
+		val: '2k',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 8,
+		val: '330pf',
+		type: 'Capacitor',
+		size: null,
+		mount: 'THT',
+	},
+	{
+		num: 2,
+		val: 'STM32',
+		type: 'IC',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 10,
+		val: '200',
+		type: 'Resistor',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 2,
+		val: '100pf',
+		type: 'Resistor',
+		size: null,
+		mount: 'THT',
+	},
+	{
+		num: 1,
+		val: 'STM64',
+		type: 'IC',
+		size: '0806',
+		mount: 'SMD',
+	},
+	{
+		num: 2,
+		val: 'T101',
+		type: 'IC',
+		size: '0806',
+		mount: 'THT',
+	},
+];
+
+function exampleReducer(state, action) {
+	switch (action.type) {
+		case 'CHANGE_SORT':
+			if (state.column === action.column) {
+				return {
+					...state,
+					data: state.data.reverse(),
+					direction: state.direction === 'ascending' ? 'descending' : 'ascending',
+				};
+			}
+
+			return {
+				column: action.column,
+				data: _.sortBy(state.data, [action.column]),
+				direction: 'ascending',
+			};
+		default:
+			throw new Error();
+	}
+}
+
 export default function PartTable(props) {
-    const [rows, setRows] = useState(10);
-    const [slice, setSlice] = useState({ start: 0, end: 10 });
-    useEffect(() => {
-        setRows(props.rows);
-        setSlice({start: 0, end: props.rows})
-        console.log(props.rows)
-    }, [props.rows])
-	const dummy = [
-		{
-			num: 20,
-			val: '20k',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 10,
-			val: '10k',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 8,
-			val: '2200pf',
-			type: 'Capacitor',
-			size: null,
-			mount: 'THT',
-		},
-		{
-			num: 20,
-			val: '1k',
-			type: 'Resistor',
-			size: '0603',
-			mount: 'SMD',
-		},
-		{
-			num: 10,
-			val: '2k',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 8,
-			val: '330pf',
-			type: 'Capacitor',
-			size: null,
-			mount: 'THT',
-		},
-		{
-			num: 2,
-			val: 'STM32',
-			type: 'IC',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 10,
-			val: '200',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 2,
-			val: '100pf',
-			type: 'Resistor',
-			size: null,
-			mount: 'THT',
-		},
-		{
-			num: 1,
-			val: 'STM64',
-			type: 'IC',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 2,
-			val: 'T101',
-			type: 'IC',
-			size: '0806',
-			mount: 'THT',
-        },
-        {
-			num: 20,
-			val: '20k',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 10,
-			val: '10k',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 8,
-			val: '2200pf',
-			type: 'Capacitor',
-			size: null,
-			mount: 'THT',
-		},
-		{
-			num: 20,
-			val: '1k',
-			type: 'Resistor',
-			size: '0603',
-			mount: 'SMD',
-		},
-		{
-			num: 10,
-			val: '2k',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 8,
-			val: '330pf',
-			type: 'Capacitor',
-			size: null,
-			mount: 'THT',
-		},
-		{
-			num: 2,
-			val: 'STM32',
-			type: 'IC',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 10,
-			val: '200',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 2,
-			val: '100pf',
-			type: 'Resistor',
-			size: null,
-			mount: 'THT',
-		},
-		{
-			num: 1,
-			val: 'STM64',
-			type: 'IC',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 2,
-			val: 'T101',
-			type: 'IC',
-			size: '0806',
-			mount: 'THT',
-        },
-        {
-			num: 20,
-			val: '20k',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 10,
-			val: '10k',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 8,
-			val: '2200pf',
-			type: 'Capacitor',
-			size: null,
-			mount: 'THT',
-		},
-		{
-			num: 20,
-			val: '1k',
-			type: 'Resistor',
-			size: '0603',
-			mount: 'SMD',
-		},
-		{
-			num: 10,
-			val: '2k',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 8,
-			val: '330pf',
-			type: 'Capacitor',
-			size: null,
-			mount: 'THT',
-		},
-		{
-			num: 2,
-			val: 'STM32',
-			type: 'IC',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 10,
-			val: '200',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 2,
-			val: '100pf',
-			type: 'Resistor',
-			size: null,
-			mount: 'THT',
-		},
-		{
-			num: 1,
-			val: 'STM64',
-			type: 'IC',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 2,
-			val: 'T101',
-			type: 'IC',
-			size: '0806',
-			mount: 'THT',
-        },
-        {
-			num: 20,
-			val: '20k',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 10,
-			val: '10k',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 8,
-			val: '2200pf',
-			type: 'Capacitor',
-			size: null,
-			mount: 'THT',
-		},
-		{
-			num: 20,
-			val: '1k',
-			type: 'Resistor',
-			size: '0603',
-			mount: 'SMD',
-		},
-		{
-			num: 10,
-			val: '2k',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 8,
-			val: '330pf',
-			type: 'Capacitor',
-			size: null,
-			mount: 'THT',
-		},
-		{
-			num: 2,
-			val: 'STM32',
-			type: 'IC',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 10,
-			val: '200',
-			type: 'Resistor',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 2,
-			val: '100pf',
-			type: 'Resistor',
-			size: null,
-			mount: 'THT',
-		},
-		{
-			num: 1,
-			val: 'STM64',
-			type: 'IC',
-			size: '0806',
-			mount: 'SMD',
-		},
-		{
-			num: 2,
-			val: 'T101',
-			type: 'IC',
-			size: '0806',
-			mount: 'THT',
-		},
-	];
+	const [rows, setRows] = useState(10);
+	const [slice, setSlice] = useState({ start: 0, end: 10 });
+	const [state, dispatch] = React.useReducer(exampleReducer, {
+		column: null,
+		data: dummy,
+		direction: null,
+	});
+	const { column, data, direction } = state;
+	useEffect(() => {
+		setRows(props.rows);
+		setSlice({ start: 0, end: props.rows });
+		console.log(props.rows);
+	}, [props.rows]);
 
 	const pageChange = (e, { children, icon }) => {
 		if (typeof children === 'number') {
@@ -337,27 +366,78 @@ export default function PartTable(props) {
 		const pages = [];
 		for (let i = 0; i < Math.ceil(dummy.length / rows); i++) {
 			pages.push(
-				<Menu.Item as='a' key={i} onClick={pageChange} active={slice.start / rows === (i)}>
+				<Menu.Item as='a' key={i} onClick={pageChange} active={slice.start / rows === i}>
 					{i + 1}
 				</Menu.Item>
 			);
 		}
 		return pages;
-	};
+    };
+    
+    const renderBlanks = () => {
+        console.log(dummy.length, dummy.length % rows)
+        const blanks = [];
+        if (slice.end > dummy.length) {
+            for (let i = 0; i < (rows - dummy.length % rows); i++) {
+                blanks.push(<Row/>)
+            }
+            return blanks;
+        }
+    }
 
 	return (
-		<Table unstackable compact='very' size='small' celled selectable inverted padded sortable>
+		<Table
+			unstackable
+			compact='very'
+			size='small'
+			celled
+			selectable
+			inverted={props.dark}
+			padded
+			sortable
+			style={{ minHeight: 450 }}
+		>
 			<Table.Header>
 				<Table.Row>
-					<Table.HeaderCell width={1}>#</Table.HeaderCell>
-					<Table.HeaderCell width={2}>Value</Table.HeaderCell>
-					<Table.HeaderCell width={2}>Type</Table.HeaderCell>
-					<Table.HeaderCell width={1}>Package Size</Table.HeaderCell>
-					<Table.HeaderCell width={2}>Mount</Table.HeaderCell>
+					<Table.HeaderCell
+						width={1}
+						sorted={column === 'num' ? direction : null}
+						onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'num' })}
+					>
+						#
+					</Table.HeaderCell>
+					<Table.HeaderCell
+						width={2}
+						sorted={column === 'val' ? direction : null}
+						onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'val' })}
+					>
+						Value
+					</Table.HeaderCell>
+					<Table.HeaderCell
+						width={2}
+						sorted={column === 'type' ? direction : null}
+						onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'type' })}
+					>
+						Type
+					</Table.HeaderCell>
+					<Table.HeaderCell
+						width={1}
+						sorted={column === 'size' ? direction : null}
+						onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'size' })}
+					>
+						Package Size
+					</Table.HeaderCell>
+					<Table.HeaderCell
+						width={2}
+						sorted={column === 'mount' ? direction : null}
+						onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'mount' })}
+					>
+						Mount
+					</Table.HeaderCell>
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
-				{dummy.slice(slice.start, slice.end).map((item, i) => (
+				{state.data.slice(slice.start, slice.end).map((item, i) => (
 					<Row
 						key={i}
 						num={item.num}
@@ -367,11 +447,12 @@ export default function PartTable(props) {
 						mount={item.mount}
 					/>
 				))}
+                {renderBlanks()}
 			</Table.Body>
 			<Table.Footer>
 				<Table.Row>
 					<Table.HeaderCell colSpan='5'>
-						<Menu floated='right' pagination size='mini' inverted>
+						<Menu floated='right' pagination size='mini' inverted={props.dark}>
 							<Menu.Item as='a' icon onClick={pageChange}>
 								<Icon name='chevron left' />
 							</Menu.Item>
