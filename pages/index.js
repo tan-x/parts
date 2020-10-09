@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Table from '../components/PartTable';
 import 'semantic-ui-css/semantic.min.css';
 import styles from '../styles/Home.module.css';
-import { Dropdown, Checkbox } from 'semantic-ui-react';
+import { Dropdown, Checkbox, Input } from 'semantic-ui-react';
 const options = [10, 20, 50];
 const rowOptions = options.map((i) => ({
 	key: i,
@@ -14,9 +14,19 @@ const rowOptions = options.map((i) => ({
 export default function Home() {
 	const [rows, setRows] = useState(10);
 	const [dark, setDark] = useState(false);
+	const [search, setSearch] = useState('');
 	const rowChange = (e, { value }) => {
 		setRows(value);
-	};
+  };
+  const searchChange = ({target}) => {
+    let searchValue;
+    if (typeof target.value === 'number') {
+      searchValue = parseInt(target.value);
+    } else {
+      searchValue = target.value.toLowerCase();
+    }
+    setSearch(searchValue);
+  }
 	return (
 		<div className={!dark ? styles.container : styles.dark}>
 			<Head>
@@ -24,14 +34,20 @@ export default function Home() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<header className={styles.header}>
-				<span style={{margin: 10, color: dark && 'white'}}>Dark Mode</span>
+				<span style={{ margin: 10, color: dark && 'white' }}>Dark Mode</span>
 				<Checkbox toggle onChange={() => setDark(!dark)} />
 			</header>
 			<main className={styles.main}>
-				<h1 className={styles.title} style={{color: dark && 'white'}}>Parts</h1>
-				<span style={{margin: 10, color: dark && 'white'}}>Rows</span>
-				<Dropdown compact selection defaultValue={rows} options={rowOptions} onChange={rowChange} />
-				<Table rows={rows} dark={dark} />
+				<h1 className={styles.title} style={{ color: dark && 'white' }}>
+					Parts
+				</h1>
+				<div>
+					<Input placeholder='Search' value={search} onChange={searchChange} />
+					<span style={{ margin: 10, color: dark && 'white' }}>Rows</span>
+					<Dropdown compact selection defaultValue={rows} options={rowOptions} onChange={rowChange} />
+				</div>
+
+				<Table rows={rows} dark={dark} search={search}/>
 			</main>
 		</div>
 	);

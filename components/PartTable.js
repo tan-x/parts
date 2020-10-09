@@ -8,18 +8,32 @@ import dummy from '../data/dummy';
 import styles from '../styles/Home.module.css';
 
 function exampleReducer(state, action) {
-	if (state.column === action.column) {
+	if (action.type === 'CHANGE_SORT') {
+		if (state.column === action.column) {
+			return {
+				...state,
+				data: state.data.reverse(),
+				direction: state.direction === 'ascending' ? 'descending' : 'ascending',
+			};
+		}
+		return {
+			column: action.column,
+			data: _.sortBy(state.data, [action.column]),
+			direction: 'ascending',
+		};
+	} else if (action.type === 'SEARCH' && action.search !== '') {
 		return {
 			...state,
-			data: state.data.reverse(),
-			direction: state.direction === 'ascending' ? 'descending' : 'ascending',
+			data: dummy.filter(
+				(item) =>
+					item.val.toLowerCase().includes(action.search) ||
+					item.type.toLowerCase().includes(action.search)
+			),
 		};
 	}
-
 	return {
-		column: action.column,
-		data: _.sortBy(state.data, [action.column]),
-		direction: 'ascending',
+		...state,
+		data: dummy,
 	};
 }
 
@@ -35,7 +49,7 @@ const renderBlanks = (dummy, end, rows) => {
 
 export default function PartTable(props) {
 	const [rows, setRows] = useState(10);
-	const [{start, end}, setSlice] = useState({ start: 0, end: 10 });
+	const [{ start, end }, setSlice] = useState({ start: 0, end: 10 });
 	const [state, dispatch] = React.useReducer(exampleReducer, {
 		column: null,
 		data: dummy,
@@ -58,13 +72,17 @@ export default function PartTable(props) {
 		}
 	};
 
+	useEffect(() => {
+		dispatch({ type: 'SEARCH', search: props.search });
+	}, [props.search]);
+
 	return (
 		<Table
 			unstackable
 			sortable
 			selectable
-			size="small"
-			compact="very"
+			size='small'
+			compact='very'
 			color={!props.dark ? 'blue' : null}
 			celled
 			inverted={props.dark}
@@ -75,7 +93,7 @@ export default function PartTable(props) {
 				{state.data.slice(start, end).map(({ val, num, type, size, mount, desc }, i) => (
 					<Row key={i} num={num} val={val} type={type} size={size} mount={mount} desc={desc} />
 				))}
-				{renderBlanks(dummy, end, rows)}
+				{renderBlanks(state.data, end, rows)}
 			</Table.Body>
 			<Table.Footer>
 				<Table.Row>
