@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Table from '../components/PartTable';
+import Filters from '../components/Filters';
 import 'semantic-ui-css/semantic.min.css';
 import styles from '../styles/Home.module.css';
 import { Dropdown, Checkbox, Input, Button, Icon } from 'semantic-ui-react';
@@ -14,8 +15,8 @@ const rowOptions = options.map((i) => ({
 export default function Home() {
 	const [rows, setRows] = useState(10);
 	const [dark, setDark] = useState(false);
-  const [search, setSearch] = useState('');
-  const [modal, setModal] = useState({filter: false})
+	const [search, setSearch] = useState('');
+	const [modal, setModal] = useState({ filter: false });
 	const rowChange = (e, { value }) => {
 		setRows(value);
 	};
@@ -27,11 +28,11 @@ export default function Home() {
 			searchValue = target.value.toLowerCase();
 		}
 		setSearch(searchValue);
-  };
-  
-  const filterModal = (e) => {
-    setModal({...modal, filter: !modal.filter})
-  }
+	};
+
+	const filterModal = (e) => {
+		setModal({ ...modal, filter: !modal.filter });
+	};
 	return (
 		<div className={!dark ? styles.container : styles.dark}>
 			<Head>
@@ -46,17 +47,27 @@ export default function Home() {
 				<h1 className={styles.title} style={{ color: dark && 'white', marginBottom: 10 }}>
 					Parts
 				</h1>
-				<div style={{ display: 'flex', justifyContent: 'space-between', width: '95vw', maxWidth: '600px', height: 40 }}>
-					<Button size="mini" compact onClick={filterModal}>
+				<div
+					style={{
+						display: 'flex',
+						justifyContent: 'space-between',
+						width: '95vw',
+						maxWidth: '600px',
+						height: 40,
+					}}
+				>
+					<Button size='mini' compact onClick={filterModal}>
 						<Icon name='filter' />
 						Filter
 					</Button>
 					<Input placeholder='Search' value={search} onChange={searchChange} />
-					<div style={{display: 'flex', alignItems: 'center'}}>
+					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<span style={{ margin: 5, color: dark && 'white' }}>Rows</span>
 						<Dropdown compact selection defaultValue={rows} options={rowOptions} onChange={rowChange} />
 					</div>
 				</div>
+
+				<Filters open={modal} setOpen={setModal} />
 				<Table rows={rows} dark={dark} search={search} />
 			</main>
 		</div>

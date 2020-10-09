@@ -35,6 +35,7 @@
 }
 
 .partTable {
+  margin: 4px !important;
   height: 450px;
   width: '95vw';
   max-width: 600px;
