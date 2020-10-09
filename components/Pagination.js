@@ -1,8 +1,9 @@
 import React from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
+import PaginationArrow from './PaginationArrow';
 
-export default function Pagination({dummy, rows, slice, pageChange, dark}) {
-    const renderPaginations = () => {
+export default function Pagination({ dummy, rows, slice, pageChange, dark }) {
+	const renderPaginations = () => {
 		const pages = [];
 		for (let i = 0; i < Math.ceil(dummy.length / rows); i++) {
 			pages.push(
@@ -12,17 +13,13 @@ export default function Pagination({dummy, rows, slice, pageChange, dark}) {
 			);
 		}
 		return pages;
-    };
-    
+	};
+
 	return (
 		<Menu floated='right' pagination size='mini' inverted={dark}>
-			<Menu.Item as='a' icon onClick={pageChange}>
-				<Icon name='chevron left' />
-			</Menu.Item>
+			<PaginationArrow dir={'left'} pageChange={pageChange} />
 			{renderPaginations()}
-			<Menu.Item as='a' icon onClick={pageChange}>
-				<Icon name='chevron right' />
-			</Menu.Item>
+			<PaginationArrow dir={'right'} pageChange={pageChange} />
 		</Menu>
 	);
 }

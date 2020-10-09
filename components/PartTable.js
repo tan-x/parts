@@ -35,11 +35,9 @@ export default function PartTable(props) {
 		data: dummy,
 		direction: null,
 	});
-	const { column, data, direction } = state;
 	useEffect(() => {
 		setRows(props.rows);
 		setSlice({ start: 0, end: props.rows });
-		console.log(props.rows);
 	}, [props.rows]);
 
 	const pageChange = (e, { children, icon }) => {
@@ -54,10 +52,7 @@ export default function PartTable(props) {
 		}
 	};
 
-	
-
 	const renderBlanks = () => {
-		console.log(dummy.length, dummy.length % rows);
 		const blanks = [];
 		if (slice.end > dummy.length) {
 			for (let i = 0; i < rows - (dummy.length % rows); i++) {
