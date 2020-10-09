@@ -17,7 +17,6 @@ describe('Row', () => {
 		const { container, debug } = render(
 			<Row num={dummy.num} val={dummy.val} type={dummy.type} size={dummy.size} mount={dummy.mount} />
         );
-        debug();
         for (const key in dummy) {
             expect.stringContaining(dummy[key])
         }
