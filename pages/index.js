@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Table from '../components/PartTable';
 import Filters from '../components/Filters';
 import 'semantic-ui-css/semantic.min.css';
 import styles from '../styles/Home.module.css';
 import { Dropdown, Checkbox, Input, Button, Icon } from 'semantic-ui-react';
+import dummy from '../data/dummy';
+import { set } from 'lodash';
+
 const options = [10, 20, 50];
 const rowOptions = options.map((i) => ({
 	key: i,
@@ -16,7 +19,9 @@ export default function Home() {
 	const [rows, setRows] = useState(10);
 	const [dark, setDark] = useState(false);
 	const [search, setSearch] = useState('');
+	const [select, setSelect] = useState({ type: '', package: '', mount: '' });
 	const [modal, setModal] = useState({ filter: false });
+	const [parts, setParts] = useState(dummy);
 	const rowChange = (e, { value }) => {
 		setRows(value);
 	};
@@ -29,6 +34,14 @@ export default function Home() {
 		}
 		setSearch(searchValue);
 	};
+
+	useEffect(() => {
+		if (modal.filter) {
+			const filtered = dummy.filter((item) => item.type === 'Resistor');
+			console.log(filtered)
+			setParts(filtered);
+		}
+	}, [select]);
 
 	const filterModal = (e) => {
 		setModal({ ...modal, filter: !modal.filter });
@@ -67,8 +80,8 @@ export default function Home() {
 					</div>
 				</div>
 
-				<Filters open={modal} setOpen={setModal} />
-				<Table rows={rows} dark={dark} search={search} />
+				<Filters open={modal} select={[select, setSelect]} />
+				<Table rows={rows} dark={dark} search={search} parts={[parts, setParts]} />
 			</main>
 		</div>
 	);

@@ -50,9 +50,10 @@ const renderBlanks = (dummy, end, rows) => {
 export default function PartTable(props) {
 	const [rows, setRows] = useState(10);
 	const [{ start, end }, setSlice] = useState({ start: 0, end: 10 });
+	const [data, setData] = useState(props.parts)
 	const [state, dispatch] = React.useReducer(exampleReducer, {
 		column: null,
-		data: dummy,
+		data: props.parts,
 		direction: null,
 	});
 	useEffect(() => {
@@ -71,6 +72,9 @@ export default function PartTable(props) {
 			}
 		}
 	};
+
+	useEffect(() => {
+	}, [props.parts])
 
 	useEffect(() => {
 		dispatch({ type: 'SEARCH', search: props.search });

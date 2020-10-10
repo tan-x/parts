@@ -3,9 +3,9 @@ import { Icon, Dropdown } from 'semantic-ui-react';
 import Fade from 'react-reveal/Fade';
 import dummy from '../data/dummy';
 
-export default function Filters({ open, setOpen }) {
+export default function Filters({ open, select }) {
 	const [filters, setFilters] = useState({ types: [], packages: [], mounts: [] });
-	const [select, setSelect] = useState({ type: '', package: '', mount: '' });
+	// const [select, setSelect] = useState({ type: '', package: '', mount: '' });
 
 	useEffect(() => {
 		const types = [...new Set(dummy.map((i) => i.type))].map((type) => ({
@@ -25,38 +25,35 @@ export default function Filters({ open, setOpen }) {
 			text: type,
 			value: type,
 		}));
-		console.log(packages, types, mounts);
 		setFilters({ ...filters, types: types, packages: packages, mounts: mounts });
 	}, []);
 
 	const selection = (e, { placeholder, value }) => {
-		console.log(placeholder);
 		switch (placeholder) {
 			case 'Type':
-				setSelect({ ...select, type: value });
+				select[1]({ ...select[0], type: value });
 				break;
 			case 'Package':
-				setSelect({ ...select, package: value });
+				select[1]({ ...select[0], package: value });
 				break;
 			case 'Mount':
-				setSelect({ ...select, mount: value });
+				select[1]({ ...select[0], mount: value });
 				break;
 			default:
 				console.log('whoops');
 		}
 	};
 
-	const clear = (e, { value }) => {
-		console.log(value);
-		switch (value) {
-			case 'type':
-				setSelect({ ...select, type: '' });
+	const clear = (e, {placeholder}) => {
+		switch (placeholder) {
+			case 'Type':
+				select[1]({ ...select[0], type: '' });
 				break;
-			case 'package':
-				setSelect({ ...select, package: '' });
+			case 'Package':
+				select[1]({ ...select[0], package: '' });
 				break;
-			case 'mount':
-				setSelect({ ...select, mount: '' });
+			case 'Mount':
+				select[1]({ ...select[0], mount: '' });
 				break;
 			default:
 				console.log('whoops');
@@ -64,7 +61,7 @@ export default function Filters({ open, setOpen }) {
 	};
 
 	return (
-		<Fade collapse bottom when={open.filter}>
+		<Fade collapse duration={400} bottom when={open.filter}>
 			<div
 				style={{
 					display: 'flex',
@@ -75,28 +72,28 @@ export default function Filters({ open, setOpen }) {
 				}}
 			>
 				<div style={{ width: 100, display: 'flex', justifyContent: 'center' }}>
-					{select.type && <Icon name='x' value='type' onClick={clear} className='clickable' />}
+					{select[0].type && <Icon name='x' value='type' onClick={clear} className='clickable' />}
 					<Dropdown
 						placeholder='Type'
-						value={select.type}
+						value={select[0].type}
 						options={filters.types}
 						onChange={selection}
 					/>
 				</div>
 				<div style={{ width: 100, display: 'flex', justifyContent: 'center' }}>
-					{select.package && <Icon name='x' value='package' onClick={clear} className='clickable' />}
+					{select[0].package && <Icon name='x' value='package' onClick={clear} className='clickable' />}
 					<Dropdown
 						placeholder='Package'
-						value={select.package}
+						value={select[0].package}
 						options={filters.packages}
 						onChange={selection}
 					/>
 				</div>
 				<div style={{ width: 100, display: 'flex', justifyContent: 'center' }}>
-					{select.mount && <Icon name='x' value='mount' onClick={clear} className='clickable' />}
+					{select[0].mount && <Icon name='x' value='mount' onClick={clear} className='clickable' />}
 					<Dropdown
 						placeholder='Mount'
-						value={select.mount}
+						value={select[0].mount}
 						options={filters.mounts}
 						onChange={selection}
 					/>
