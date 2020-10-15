@@ -1,0 +1,1 @@
+mongodb+srv://tanx:<password>@cluster0.dxfqd.mongodb.net/<dbname>?retryWrites=true&w=majority

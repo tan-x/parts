@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 
-export default function Row({ num, val, type, size, mount, desc }) {
+export function Row({ num, val, type, size, mount, desc }) {
 	return (
 		<Table.Row style={{ height: 29 }}>
 			<Table.Cell>{num}</Table.Cell>

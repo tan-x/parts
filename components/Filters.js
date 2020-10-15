@@ -3,7 +3,7 @@ import { Icon, Dropdown } from 'semantic-ui-react';
 import Fade from 'react-reveal/Fade';
 import dummy from '../data/dummy';
 
-export default function Filters({ open, select }) {
+export function Filters({ open, select }) {
 	const [filters, setFilters] = useState({ types: [], packages: [], mounts: [] });
 	// const [select, setSelect] = useState({ type: '', package: '', mount: '' });
 

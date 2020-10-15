@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import { Table, Menu, Icon } from 'semantic-ui-react';
-import TableHeader from './TableHeader';
-import Row from './Row';
-import Pagination from './Pagination';
+import { TableHeader } from './TableHeader';
+import { Row } from './Row';
+import { Pagination } from './Pagination';
 import dummy from '../data/dummy';
 import styles from '../styles/Home.module.css';
 
@@ -47,10 +47,10 @@ const renderBlanks = (dummy, end, rows) => {
 	}
 };
 
-export default function PartTable(props) {
+export function PartTable(props) {
 	const [rows, setRows] = useState(10);
 	const [{ start, end }, setSlice] = useState({ start: 0, end: 10 });
-	const [data, setData] = useState(props.parts)
+	const [data, setData] = useState(props.parts);
 	const [state, dispatch] = React.useReducer(exampleReducer, {
 		column: null,
 		data: props.parts,
@@ -73,8 +73,7 @@ export default function PartTable(props) {
 		}
 	};
 
-	useEffect(() => {
-	}, [props.parts])
+	useEffect(() => {}, [props.parts]);
 
 	useEffect(() => {
 		dispatch({ type: 'SEARCH', search: props.search });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 
-export default function TableHeader({ state, dispatch }) {
+export function TableHeader({ state, dispatch }) {
 	const { column, direction } = state;
 	const cells = [
 		{ value: 'num', text: '#', width: 1 },

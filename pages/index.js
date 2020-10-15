@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Table from '../components/PartTable';
-import Filters from '../components/Filters';
+import { PartTable, Filters } from '../components';
 import 'semantic-ui-css/semantic.min.css';
 import styles from '../styles/Home.module.css';
 import { Dropdown, Checkbox, Input, Button, Icon } from 'semantic-ui-react';
@@ -38,7 +37,7 @@ export default function Home() {
 	useEffect(() => {
 		if (modal.filter) {
 			const filtered = dummy.filter((item) => item.type === 'Resistor');
-			console.log(filtered)
+			console.log(filtered);
 			setParts(filtered);
 		}
 	}, [select]);
@@ -81,7 +80,7 @@ export default function Home() {
 				</div>
 
 				<Filters open={modal} select={[select, setSelect]} />
-				<Table rows={rows} dark={dark} search={search} parts={[parts, setParts]} />
+				<PartTable rows={rows} dark={dark} search={search} parts={[parts, setParts]} />
 			</main>
 		</div>
 	);
