@@ -3,15 +3,16 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "node server.js -p $PORT",
 		"build": "next build",
-		"start": "next start",
+		"start": "NODE_ENV=production node server.js -p $PORT",
 		"test": "jest"
 	},
 	"dependencies": {
 		"@testing-library/dom": "^7.24.5",
 		"@testing-library/jest-dom": "^5.11.4",
 		"@testing-library/react": "^11.0.4",
+		"axios": "^0.20.0",
 		"babel-jest": "^26.5.2",
 		"express": "^4.17.1",
 		"identity-obj-proxy": "^3.0.0",

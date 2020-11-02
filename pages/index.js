@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import axios from 'axios';
 import { PartTable, Filters } from '../components';
 import 'semantic-ui-css/semantic.min.css';
 import styles from '../styles/Home.module.css';
@@ -20,7 +21,7 @@ export default function Home() {
 	const [search, setSearch] = useState('');
 	const [select, setSelect] = useState({ type: '', package: '', mount: '' });
 	const [modal, setModal] = useState({ filter: false });
-	const [parts, setParts] = useState(dummy);
+	const [parts, setParts] = useState([]);
 	const rowChange = (e, { value }) => {
 		setRows(value);
 	};
@@ -35,8 +36,15 @@ export default function Home() {
 	};
 
 	useEffect(() => {
+		axios.get('/api/parts').then((res) => {
+			console.log(res.data);
+			setParts(res.data);
+		});
+	}, []);
+
+	useEffect(() => {
 		if (modal.filter) {
-			const filtered = dummy.filter((item) => item.type === 'Resistor');
+			const filtered = parts.filter((item) => item.type === 'Resistor');
 			console.log(filtered);
 			setParts(filtered);
 		}
