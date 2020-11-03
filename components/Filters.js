@@ -44,15 +44,15 @@ export function Filters({ open, select }) {
 		}
 	};
 
-	const clear = (e, {placeholder}) => {
-		switch (placeholder) {
-			case 'Type':
+	const clear = (e, {value}) => {
+		switch (value) {
+			case 'type':
 				select[1]({ ...select[0], type: '' });
 				break;
-			case 'Package':
+			case 'package':
 				select[1]({ ...select[0], package: '' });
 				break;
-			case 'Mount':
+			case 'mount':
 				select[1]({ ...select[0], mount: '' });
 				break;
 			default:
